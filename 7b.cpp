@@ -23,16 +23,22 @@ int main() {
     }
   }
 
+  std::vector<int> candidates;
+
   int avg = sum / nums.size();
-  std::cout << sum << std::endl;
-  std::cout << nums.size() << std::endl;
-  std::cout << avg << std::endl;
+  candidates.push_back(avg);
+  if (avg * nums.size() != sum)
+    candidates.push_back(avg + 1);
 
-  int result = std::transform_reduce(
-      nums.begin(), nums.end(), 0, std::plus<>(),
-      [avg](int n) { return std::abs(n - avg) * (std::abs(n - avg) + 1) / 2; });
+  int fuel = INT32_MAX;
+  for (int c : candidates) {
+    int result = std::transform_reduce(
+        nums.begin(), nums.end(), 0, std::plus<>(),
+        [c](int n) { return std::abs(n - c) * (std::abs(n - c) + 1) / 2; });
+    fuel = std::min(result, fuel);
+  }
 
-  std::cout << result << std::endl;
+  std::cout << fuel << std::endl;
 
   return 0;
 }
