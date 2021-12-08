@@ -3,7 +3,7 @@
 #include <string>
 
 #define PERIOD 8
-#define DAY 256
+#define DAY 80
 #define TARGET_DAY DAY + PERIOD
 
 int main() {
