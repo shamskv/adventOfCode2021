@@ -8,6 +8,7 @@
 #include <vector>
 
 std::vector<std::vector<std::string>> paths;
+bool exception_allowed = true;
 
 bool isLowerCase(std::string &str) {
   return std::all_of(str.begin(), str.end(),
@@ -43,13 +44,24 @@ int main() {
     // Backtrack if we are on our way "back"
     if (backtrack) {
       currPath.pop_back();
+      // If I'm still in path after leaving, I was using the exception
+      if (isLowerCase(currNode)) {
+        if (std::find(currPath.begin(), currPath.end(), currNode) !=
+            currPath.end()) {
+          exception_allowed = true;
+        }
+      }
       continue;
     }
     // if small node, check if we are not in path already
     if (isLowerCase(currNode)) {
       if (std::find(currPath.begin(), currPath.end(), currNode) !=
           currPath.end()) {
-        continue;
+        if (!exception_allowed || currNode == "start") {
+          continue;
+        } else {
+          exception_allowed = false;
+        }
       }
     }
     // Place current node on current path and add backtrack entry to stack
