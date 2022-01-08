@@ -19,7 +19,7 @@ class Matrix {
 
   T operator()(int x, int y) {
     int total = matrix.at((x % x_s) * x_s + (y % y_s)) + x / x_s + y / y_s;
-    if (total > 9) total = ((total - 1) % 9) + 1;
+    total = ((total - 1) % 9) + 1;
     return total;
   }
   T operator()(const std::pair<int, int> &xy) {
