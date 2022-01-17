@@ -46,12 +46,6 @@ int main() {
     }
   }
 
-  auto branch = outcomeFrequency.begin();
-  while (branch != outcomeFrequency.end()) {
-    printf("%d %d\n", branch->first, branch->second);
-    branch++;
-  }
-
   playARound(true, 0, 0, pos1, pos2, 1);
   std::cout << win1 << std::endl;
   std::cout << win2 << std::endl;
